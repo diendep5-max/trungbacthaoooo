@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thế Giới Trứng Bắc Thảo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Mali', cursive;
+            /* Đa dạng màu sắc: Nền gradient pastel chuyển động */
+            background: linear-gradient(135deg, #ffe1e8, #e0f2fe, #dcfce7, #fef08a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #3b4d2e;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Phóng to ảnh bìa */
+        .cover-image {
+            width: 400px; /* Đã zoom to ra */
+            max-width: 90%;
+            border-radius: 20px;
+            border: 5px solid #fff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            margin: 20px auto;
+            display: block;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #d1567d;
+            text-shadow: 2px 2px 0px #fff;
+        }
+
+        /* Xóa phông trắng và thêm nhiều sticker */
+        .jumping-sticker {
+            position: fixed;
+            width: 110px;
+            z-index: -1;
+            /* Lệnh này giúp nền trắng của ảnh JPG hòa vào nền web, tạo cảm giác không viền */
+            mix-blend-mode: multiply; 
+        }
+
+        /* Sắp xếp 5 sticker ở các góc khác nhau */
+        .stick-1 { top: 10%; left: 3%; animation: float1 4s infinite alternate ease-in-out; }
+        .stick-2 { top: 15%; right: 3%; animation: float2 5s infinite alternate ease-in-out; }
+        .stick-3 { bottom: 10%; left: 5%; animation: float2 4.5s infinite alternate ease-in-out; }
+        .stick-4 { bottom: 15%; right: 5%; animation: float1 5.5s infinite alternate ease-in-out; }
+        .stick-5 { top: 45%; left: 5%; animation: float1 6s infinite alternate ease-in-out; width: 90px; }
+
+        @keyframes float1 {
+            0% { transform: translateY(0) rotate(-15deg) scale(1); }
+            100% { transform: translateY(-40px) rotate(10deg) scale(1.1); }
+        }
+
+        @keyframes float2 {
+            0% { transform: translateY(0) rotate(10deg) scale(1); }
+            100% { transform: translateY(-30px) rotate(-15deg) scale(1.15); }
+        }
+
+        /* Nút bấm đa màu sắc */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        button {
+            color: #4a633a;
+            border: 3px solid #fff;
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            font-family: inherit;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+            font-weight: 700;
+        }
+
+        .btn-1 { background-color: #ffb3c6; } /* Hồng */
+        .btn-2 { background-color: #bae1ff; } /* Xanh biển */
+        .btn-3 { background-color: #fdfd96; } /* Vàng */
+
+        button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        #next-btn {
+            background-color: #ffb3c6; 
+            color: #d1567d;
+            border: 3px solid #fff;
+            display: none; 
+            margin: 15px auto;
+            font-size: 1.3rem;
+            padding: 10px 40px;
+        }
+
+        #result-area {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 0.5s ease-in-out;
+            z-index: 10;
+            position: relative;
+            min-height: 350px;
+        }
+
+        #result-text {
+            font-size: 1.8rem;
+            color: #d1567d;
+            margin-bottom: 20px;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+
+        #result-img {
+            width: 300px;
+            max-width: 90%;
+            border-radius: 20px;
+            border: 5px solid #fff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            animation: bounceIn 0.8s;
+            display: none; 
+        }
+
+        .heart {
+            position: fixed;
+            font-size: 2rem;
+            color: #ff4d6d;
+            animation: flyUp 3s ease-in forwards;
+            z-index: 999;
+            pointer-events: none;
+        }
+
+        @keyframes flyUp {
+            0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1.5) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes bounceIn { 0% { transform: scale(0.1); opacity: 0; } 60% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); } }
+    </style>
+</head>
+<body>
+
+    <!-- 5 Sticker nhảy múa không viền -->
+    <img src="download (4).jpg" class="jumping-sticker stick-1" alt="Sticker 1">
+    <img src="download (6).jpg" class="jumping-sticker stick-2" alt="Sticker 2">
+    <img src="download (3).jpg" class="jumping-sticker stick-3" alt="Sticker 3">
+    <img src="download (1)_2.jpg" class="jumping-sticker stick-4" alt="Sticker 4">
+    <img src="834854849719141316.jpg" class="jumping-sticker stick-5" alt="Sticker 5">
+
+    <!-- Ảnh bìa được zoom to -->
+    <img src="download (2).jpg" class="cover-image" alt="Ảnh bìa trứng bắc thảo cute">
+
+    <h1>Xin chào, chào mừng tới với thế giới trứng bắc thảo!</h1>
+
+    <div class="button-container">
+        <button class="btn-1" onclick="showResult('tui-la-ai')">tui là ai?</button>
+        <button class="btn-2" onclick="showResult('ban-la-gi')">bạn là gì của tui?</button>
+        <button class="btn-3" onclick="showResult('tai-sao')">tại sao lại có cái web này?</button>
+    </div>
+
+    <div id="result-area">
+        <h2 id="result-text"></h2>
+        <button id="next-btn" onclick="showNext()">Next ➔</button>
+        <img id="result-img" src="" alt="Kết quả">
+    </div>
+
+    <script>
+        function createHearts() {
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '💖';
+                    heart.classList.add('heart');
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.top = window.innerHeight + 'px';
+                    const size = Math.random() * 2 + 1;
+                    heart.style.fontSize = size + 'rem';
+                    document.body.appendChild(heart);
+                    setTimeout(() => { heart.remove(); }, 3000);
+                }, i * 100); 
+            }
+        }
+
+        function showResult(type) {
+            const resultArea = document.getElementById('result-area');
+            const resultText = document.getElementById('result-text');
+            const resultImg = document.getElementById('result-img');
+            const nextBtn = document.getElementById('next-btn');
+
+            resultArea.style.display = 'flex';
+            resultImg.style.animation = 'none';
+            resultImg.offsetHeight; 
+            resultImg.style.animation = 'bounceIn 0.8s';
+            
+            if (type === 'tui-la-ai') {
+                resultText.innerText = 'ngừi bạn đáng iu nhất thế giới';
+                resultImg.src = '591871576072367109.jpg';
+                resultImg.style.display = 'block';
+                nextBtn.style.display = 'none';
+                createHearts();
+            } else if (type === 'ban-la-gi') {
+                resultText.innerText = 'ngừi bạn iu iu cụa tui, cảm ơn bạn zì đã tới với thế zới này';
+                resultImg.src = '891290582524068607.jpg';
+                resultImg.style.display = 'block';
+                nextBtn.style.display = 'none';
+                createHearts();
+            } else if (type === 'tai-sao') {
+                resultText.innerText = 'vì tui mún cảm ơn bạn và....';
+                resultImg.style.display = 'none'; 
+                nextBtn.style.display = 'block';
+            }
+        }
+
+        function showNext() {
+            const resultText = document.getElementById('result-text');
+            const resultImg = document.getElementById('result-img');
+            const nextBtn = document.getElementById('next-btn');
+            
+            resultText.innerText = 'hong nói hihi';
+            resultImg.src = 'download (1).jpg'; 
+            resultImg.style.display = 'block';
+            nextBtn.style.display = 'none'; 
+            
+            resultImg.style.animation = 'none';
+            resultImg.offsetHeight;
+            resultImg.style.animation = 'bounceIn 0.8s';
+            createHearts();
+        }
+    </script>
+
+</body>
+</html>
