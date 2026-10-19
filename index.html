@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thế Giới Trứng Bắc Thảo</title>
+    <!-- Font chữ Mali đáng yêu -->
     <link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <style>
         body {
             font-family: 'Mali', cursive;
-            /* Đa dạng màu sắc: Nền gradient pastel chuyển động */
-            background: linear-gradient(135deg, #ffe1e8, #e0f2fe, #dcfce7, #fef08a);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            color: #3b4d2e;
+            /* Nền màu kem pastel nhẹ nhàng, tinh tế, không bị "gớm" nữa */
+            background-color: #fff9f0;
+            background-image: radial-gradient(#ffe3e3 2px, transparent 2px);
+            background-size: 30px 30px; /* Họa tiết chấm bi mờ đáng yêu */
+            color: #5c4d4d;
             text-align: center;
             margin: 0;
             padding: 20px;
@@ -22,100 +23,71 @@
             min-height: 100vh;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Phóng to ảnh bìa */
+        /* Ảnh bìa zoom to */
         .cover-image {
-            width: 400px; /* Đã zoom to ra */
+            width: 450px;
             max-width: 90%;
-            border-radius: 20px;
-            border: 5px solid #fff;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            border-radius: 30px;
+            border: 6px solid #fff;
+            box-shadow: 0 12px 25px rgba(255, 179, 198, 0.4);
             margin: 20px auto;
             display: block;
+            pointer-events: none; /* Không bị vướng khi kéo sticker */
         }
 
         h1 {
             font-size: 2.2rem;
-            margin-bottom: 20px;
-            color: #d1567d;
+            margin-bottom: 25px;
+            color: #ff758f;
             text-shadow: 2px 2px 0px #fff;
+            font-weight: 700;
         }
 
-        /* Xóa phông trắng và thêm nhiều sticker */
-        .jumping-sticker {
-            position: fixed;
-            width: 110px;
-            z-index: -1;
-            /* Lệnh này giúp nền trắng của ảnh JPG hòa vào nền web, tạo cảm giác không viền */
-            mix-blend-mode: multiply; 
-        }
-
-        /* Sắp xếp 5 sticker ở các góc khác nhau */
-        .stick-1 { top: 10%; left: 3%; animation: float1 4s infinite alternate ease-in-out; }
-        .stick-2 { top: 15%; right: 3%; animation: float2 5s infinite alternate ease-in-out; }
-        .stick-3 { bottom: 10%; left: 5%; animation: float2 4.5s infinite alternate ease-in-out; }
-        .stick-4 { bottom: 15%; right: 5%; animation: float1 5.5s infinite alternate ease-in-out; }
-        .stick-5 { top: 45%; left: 5%; animation: float1 6s infinite alternate ease-in-out; width: 90px; }
-
-        @keyframes float1 {
-            0% { transform: translateY(0) rotate(-15deg) scale(1); }
-            100% { transform: translateY(-40px) rotate(10deg) scale(1.1); }
-        }
-
-        @keyframes float2 {
-            0% { transform: translateY(0) rotate(10deg) scale(1); }
-            100% { transform: translateY(-30px) rotate(-15deg) scale(1.15); }
-        }
-
-        /* Nút bấm đa màu sắc */
+        /* Khung chứa các nút */
         .button-container {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 15px;
             margin-top: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 10;
         }
 
         button {
-            color: #4a633a;
+            color: #fff;
             border: 3px solid #fff;
-            padding: 12px 25px;
-            font-size: 1.2rem;
+            padding: 15px 30px;
+            font-size: 1.3rem;
             font-family: inherit;
-            border-radius: 30px;
+            border-radius: 40px;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
             transition: all 0.2s;
             font-weight: 700;
         }
 
-        .btn-1 { background-color: #ffb3c6; } /* Hồng */
-        .btn-2 { background-color: #bae1ff; } /* Xanh biển */
-        .btn-3 { background-color: #fdfd96; } /* Vàng */
+        .btn-1 { background-color: #ffb3c6; }
+        .btn-2 { background-color: #a0c4ff; }
+        .btn-3 { background-color: #ffd6a5; color: #6b5b5b; }
 
         button:hover {
             transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
         }
 
         button:active {
-            transform: translateY(1px);
+            transform: translateY(2px);
         }
 
         #next-btn {
-            background-color: #ffb3c6; 
-            color: #d1567d;
-            border: 3px solid #fff;
+            background-color: #ff9fb6; 
+            color: #fff;
             display: none; 
-            margin: 15px auto;
-            font-size: 1.3rem;
-            padding: 10px 40px;
+            margin: 20px auto;
+            font-size: 1.4rem;
+            padding: 12px 45px;
         }
 
         #result-area {
@@ -125,32 +97,56 @@
             animation: fadeIn 0.5s ease-in-out;
             z-index: 10;
             position: relative;
-            min-height: 350px;
+            min-height: 400px;
         }
 
         #result-text {
-            font-size: 1.8rem;
-            color: #d1567d;
+            font-size: 2rem;
+            color: #ff4d6d;
             margin-bottom: 20px;
             font-weight: 700;
-            background: rgba(255, 255, 255, 0.7);
-            padding: 10px 20px;
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 15px 30px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
         #result-img {
-            width: 300px;
+            width: 350px;
             max-width: 90%;
-            border-radius: 20px;
-            border: 5px solid #fff;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-radius: 30px;
+            border: 6px solid #fff;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
             animation: bounceIn 0.8s;
             display: none; 
+            pointer-events: none;
         }
 
+        /* --- STICKER BAY LƯỢN VÀ KÉO THẢ --- */
+        .draggable-sticker {
+            position: absolute;
+            width: 120px;
+            cursor: grab;
+            z-index: 5;
+            user-select: none;
+            touch-action: none; /* Rất quan trọng để lướt điện thoại không bị trôi trang */
+            /* Hiệu ứng bay lơ lửng mặc định */
+            animation: float 4s infinite alternate ease-in-out;
+        }
+
+        .draggable-sticker:active {
+            cursor: grabbing;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(-5deg); }
+            100% { transform: translateY(-30px) rotate(5deg); }
+        }
+
+        /* Hiệu ứng thả tim */
         .heart {
             position: fixed;
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: #ff4d6d;
             animation: flyUp 3s ease-in forwards;
             z-index: 999;
@@ -168,15 +164,18 @@
 </head>
 <body>
 
-    <!-- 5 Sticker nhảy múa không viền -->
-    <img src="download (4).jpg" class="jumping-sticker stick-1" alt="Sticker 1">
-    <img src="download (6).jpg" class="jumping-sticker stick-2" alt="Sticker 2">
-    <img src="download (3).jpg" class="jumping-sticker stick-3" alt="Sticker 3">
-    <img src="download (1)_2.jpg" class="jumping-sticker stick-4" alt="Sticker 4">
-    <img src="834854849719141316.jpg" class="jumping-sticker stick-5" alt="Sticker 5">
+    <!-- NHÂN BẢN STICKER ĐỂ CHÚNG BAY LUNG TUNG -->
+    <!-- Bạn có thể kéo thả bất kỳ bé nào trong này -->
+    <img src="download (4)_2.jpg" class="draggable-sticker" style="top: 5%; left: 5%;" alt="Sticker">
+    <img src="download (4)_2.jpg" class="draggable-sticker" style="top: 40%; right: 5%; animation-delay: 1s;" alt="Sticker">
+    <img src="download (4)_2.jpg" class="draggable-sticker" style="bottom: 10%; left: 15%; animation-delay: 2s;" alt="Sticker">
+    
+    <img src="download (6)_2.jpg" class="draggable-sticker" style="top: 15%; right: 10%; animation-delay: 0.5s;" alt="Sticker">
+    <img src="download (6)_2.jpg" class="draggable-sticker" style="top: 60%; left: 8%; animation-delay: 1.5s;" alt="Sticker">
+    <img src="download (6)_2.jpg" class="draggable-sticker" style="bottom: 15%; right: 15%; animation-delay: 2.5s;" alt="Sticker">
 
-    <!-- Ảnh bìa được zoom to -->
-    <img src="download (2).jpg" class="cover-image" alt="Ảnh bìa trứng bắc thảo cute">
+    <!-- Ảnh bìa -->
+    <img src="download (2)_2.jpg" class="cover-image" alt="Ảnh bìa trứng bắc thảo cute">
 
     <h1>Xin chào, chào mừng tới với thế giới trứng bắc thảo!</h1>
 
@@ -188,27 +187,28 @@
 
     <div id="result-area">
         <h2 id="result-text"></h2>
-        <button id="next-btn" onclick="showNext()">Next ➔</button>
+        <button id="next-btn" class="btn-1" onclick="showNext()">Next ➔</button>
         <img id="result-img" src="" alt="Kết quả">
     </div>
 
     <script>
+        // === LOGIC TẠO TIM BAY TỨ TUNG ===
         function createHearts() {
-            for (let i = 0; i < 30; i++) {
+            for (let i = 0; i < 35; i++) {
                 setTimeout(() => {
                     const heart = document.createElement('div');
                     heart.innerHTML = '💖';
                     heart.classList.add('heart');
                     heart.style.left = Math.random() * 100 + 'vw';
                     heart.style.top = window.innerHeight + 'px';
-                    const size = Math.random() * 2 + 1;
-                    heart.style.fontSize = size + 'rem';
+                    heart.style.fontSize = (Math.random() * 2 + 1) + 'rem';
                     document.body.appendChild(heart);
                     setTimeout(() => { heart.remove(); }, 3000);
-                }, i * 100); 
+                }, i * 80); 
             }
         }
 
+        // === LOGIC HIỂN THỊ NÚT BẤM VÀ ẢNH MỚI ===
         function showResult(type) {
             const resultArea = document.getElementById('result-area');
             const resultText = document.getElementById('result-text');
@@ -222,13 +222,13 @@
             
             if (type === 'tui-la-ai') {
                 resultText.innerText = 'ngừi bạn đáng iu nhất thế giới';
-                resultImg.src = '591871576072367109.jpg';
+                resultImg.src = '591871576072367109_2.jpg'; // Ảnh mới _2
                 resultImg.style.display = 'block';
                 nextBtn.style.display = 'none';
                 createHearts();
             } else if (type === 'ban-la-gi') {
                 resultText.innerText = 'ngừi bạn iu iu cụa tui, cảm ơn bạn zì đã tới với thế zới này';
-                resultImg.src = '891290582524068607.jpg';
+                resultImg.src = '891290582524068607_2.jpg'; // Ảnh mới _2
                 resultImg.style.display = 'block';
                 nextBtn.style.display = 'none';
                 createHearts();
@@ -245,7 +245,7 @@
             const nextBtn = document.getElementById('next-btn');
             
             resultText.innerText = 'hong nói hihi';
-            resultImg.src = 'download (1).jpg'; 
+            resultImg.src = 'download (1)_3.jpg'; // Ảnh suỵt mới _3
             resultImg.style.display = 'block';
             nextBtn.style.display = 'none'; 
             
@@ -254,6 +254,70 @@
             resultImg.style.animation = 'bounceIn 0.8s';
             createHearts();
         }
+
+        // === LOGIC KÉO THẢ STICKER BẰNG CHUỘT / CẢM ỨNG ĐIỆN THOẠI ===
+        const draggables = document.querySelectorAll('.draggable-sticker');
+        
+        draggables.forEach(sticker => {
+            let isDragging = false;
+            let startX, startY, initialX, initialY;
+
+            const dragStart = (e) => {
+                isDragging = true;
+                // Khi chạm vào, tạm dừng hiệu ứng bay để dễ kéo
+                sticker.style.animation = 'none';
+                sticker.style.zIndex = 100; // Đưa sticker lên lớp trên cùng
+
+                if (e.type === 'touchstart') {
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                } else {
+                    startX = e.clientX;
+                    startY = e.clientY;
+                }
+                
+                initialX = sticker.offsetLeft;
+                initialY = sticker.offsetTop;
+            };
+
+            const dragMove = (e) => {
+                if (!isDragging) return;
+                // Ngăn chặn cuộn màn hình khi đang kéo trên điện thoại
+                if (e.type === 'touchmove') e.preventDefault();
+                
+                let currentX, currentY;
+                if (e.type === 'touchmove') {
+                    currentX = e.touches[0].clientX;
+                    currentY = e.touches[0].clientY;
+                } else {
+                    currentX = e.clientX;
+                    currentY = e.clientY;
+                }
+                
+                const dx = currentX - startX;
+                const dy = currentY - startY;
+                
+                sticker.style.left = (initialX + dx) + 'px';
+                sticker.style.top = (initialY + dy) + 'px';
+            };
+
+            const dragEnd = () => {
+                isDragging = false;
+                sticker.style.zIndex = 5;
+                // Kéo xong cho bé nó tiếp tục bay lơ lửng tại vị trí mới
+                sticker.style.animation = 'float 4s infinite alternate ease-in-out';
+            };
+
+            // Sự kiện cho chuột (Máy tính)
+            sticker.addEventListener('mousedown', dragStart);
+            document.addEventListener('mousemove', dragMove);
+            document.addEventListener('mouseup', dragEnd);
+
+            // Sự kiện cho cảm ứng (Điện thoại/Tablet)
+            sticker.addEventListener('touchstart', dragStart, {passive: false});
+            document.addEventListener('touchmove', dragMove, {passive: false});
+            document.addEventListener('touchend', dragEnd);
+        });
     </script>
 
 </body>
